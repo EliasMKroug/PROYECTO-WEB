@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
 /* RUTA PARA BORRAR Y REDIRECCIONAR EN LA DB */
 router.get('/delete/:id', async (req, res) => {
     const {id} = req.params
-    await pool.query('DELETE FROM links WHERE ID = ?', [id])
+    await pool.query('DELETE FROM links WHERE id = ?', [id])
     req.flash('success', 'link borrado con exito')
     res.redirect('/links')
 })
