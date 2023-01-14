@@ -2,25 +2,28 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 
-/* ACTUALIZA EL FORMULARIO SIGNUP */
-router.get('/signup', (req, res) => {
+const { isLoggedIn, isNotLoggedIn } = require('../lib/auth')
+
+/* ACTUALIZACION DE RUTA SIGNUP */
+router.get('/signup', isNotLoggedIn, (req, res) => {
     res.render('auth/signup')
 })
 
-/* LA RUTA DE SIGNUP*/
-router.post('/signup', passport.authenticate('local.signup', {
+/* AUTENTICACION DE RUTA SIGNUP*/
+router.post('/signup', isNotLoggedIn, passport.authenticate('local.signup', {
     successRedirect: '/profile',
     failureRedirect: '/signup',
     failureFlash: true
 
 }))
 
-/* LA RUTA DE SIGNIN*/
-router.get('/signin', (req, res) => {
+/* ACTUALIZACION RUTA DE SIGNIN*/
+router.get('/signin', isNotLoggedIn, (req, res) => {
     res.render('auth/signin')
 })
 
-router.post('/signin', (req, res, next) =>{
+/* AUTENTICACION DE RUTA SIGNIN */
+router.post('/signin', isNotLoggedIn, (req, res, next) =>{
     passport.authenticate('local.signin', {
         successRedirect: '/profile',
         failureRedirect: '/signin',
@@ -28,8 +31,19 @@ router.post('/signin', (req, res, next) =>{
     })(req, res, next)
 })
 
-router.get('/profile', (req, res) => {
-    res.send('este es tu perfil')
+/* ACTUALIZACION RUTA DE PROFILE*/
+router.get('/profile',isLoggedIn, (req, res) => {
+    res.render('profile')
+})
+
+/* ACTUALIZACION RUTA DE LOGOUT TERMINA CON LA RUTA DEL USUARIO EXISTENTE*/
+router.get('/logout', isLoggedIn, async (req, res) => {
+    req.logOut(req.user, err => {
+        if(err) {
+            return next(err)
+        }
+    })
+    res.redirect('/signin')
 })
 
 
