@@ -17,7 +17,8 @@ router.post('/add', async (req, res) => {
     const newLink = {
         title,
         url,
-        description
+        description,
+        user_id: req.user_id
     }
     console.log(newLink)
     //GUARDO DATO DEL FORMULARIO EN MI BD
