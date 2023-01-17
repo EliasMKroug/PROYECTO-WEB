@@ -14,7 +14,6 @@ router.post('/signup', isNotLoggedIn, passport.authenticate('local.signup', {
     successRedirect: '/profile',
     failureRedirect: '/signup',
     failureFlash: true
-
 }))
 
 /* ACTUALIZACION RUTA DE SIGNIN*/

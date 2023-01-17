@@ -5,14 +5,17 @@
             <div class="card">
                 <div class="card-body ">
                     <form action="/links/add" method="POST">
+                        <div class="form-group p-1">
+                            <h3 class="text-center">Agregar un Link</h3>
+                        </div>
                         <div class="form-group p-2">
-                            <input type="text" class="form-control" name="title" placeholder="title" autofocus>
+                            <input type="text" class="form-control" name="title" placeholder="Nombre" autofocus>
                         </div>
                         <div class="form-group p-2">
                             <input type="url" name="url" class="form-control" placeholder="URL">
                         </div>
                         <div class="form-group p-2">
-                            <textarea name="description" rows="2" class="form-control" placeholder="description"></textarea>
+                            <textarea name="description" rows="2" class="form-control" placeholder="Descripcion"></textarea>
                         </div>
                         <div class="form-group p-2 d-grid gap-1">
                             <button class="btn btn-success btn-block">
