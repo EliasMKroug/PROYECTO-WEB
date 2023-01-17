@@ -25,6 +25,7 @@
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
+    "node-sass": "^8.0.0",
     "nodemon": "^2.0.20"
   }
 }

@@ -1,0 +1,259 @@
+/* Imports */
+
+@import 'variables';
+@import 'colores';
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+/* #### HEADER #### */
+
+.header{
+    
+    .header__div{
+        .header__div1 img:hover {
+            transition: all 2s;
+            transform: translate($movH-logo);
+        }
+    }
+
+    .nav-item .nav-link:hover {
+        color: map-get($colors, colorprimario);;
+        background-color: map-get($colors, colorterciario);
+        height: 50px;
+    }
+}
+
+/*  #### FOOTER #### */
+
+.footer{
+    .footer__img{
+        img:hover{
+            transition: all 2s;
+            transform: translate($movH-logo);
+        }
+    }
+}
+
+/* #### MAIN #### */
+
+    /* #### INDEX #### */
+.index{
+    .sectionIndex__div1{
+        img:hover{
+            transition: all 2s;
+            transform: translate($movH-img);
+        }
+
+    }
+    .sectionIndex__div2{
+        display: grid;
+        grid-template-columns: auto;
+        text-align: center;
+        .sectionIndex__video{
+            padding: 5px;
+        }
+        .sectionIndex__p{
+            padding: 10px;
+            text-align: justify;
+        }
+        
+    }
+}
+
+    /* #### OBRAS #### */
+
+.sectionMain-obras {
+    display: grid;
+    grid-template-rows: (4,auto) ;
+    .sectionObras_title{
+        display: grid;
+        grid-template-rows: 75px;
+        justify-items: start;
+        align-items: center;
+        font-size: x-large;
+    }
+    .sectionObras__1{
+        display: grid;
+        grid-template-rows: (3,auto);
+        border-top: solid 1px map-get($colors, colorMenu ) ;
+        row-gap: 10px;
+        padding: 5px;
+        justify-items: start;
+        align-items: center;
+        .sectionObras__title1{
+            display: grid;
+            grid-template-rows: 50px;
+            justify-items: start;
+            align-items: center;
+            font-size: x-large;
+        }
+        .sectionObras_img{
+            width: 100%;
+            height: auto;
+        }
+        .sectionObras_img:hover{
+            transition: all 2s;
+            transform: translate($movH-img);
+        }
+        .sectionObras_p {
+            text-align: justify;
+        }
+    }
+}
+
+    /* #### SERVICIOS #### */
+
+.index{
+    .sectionArticle{
+        .list-group:hover{
+            .list-group-item:hover {
+                color: map-get($colors, colorprimario);
+                background-color: map-get($colors, colorterciario);
+                padding: 10px;
+            } 
+        }
+        .pMain {
+            text-align: justify;
+        }
+    }
+}    
+
+/* Full Responsive */
+
+.index {
+
+    @media screen and (max-width: 350px){
+        .sectionIndex__div2 {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto auto;  
+            justify-items: center;
+            .sectionIndex__video {
+                grid-row: 1;
+                justify-items: center;
+                align-items: center;
+                .sectionIndex__vid {
+                    width: 100%;
+                    height: auto;
+                }
+                            
+            }
+            .sectionIndex__p {
+                grid-row: 2;
+                font-size: x-small;
+                -ms-text-size-adjust: initial;
+                padding: 10px;
+                justify-self: start;
+                align-self: center;
+            }
+        }        
+    }
+
+    @media (min-width: 351px) and (max-width: 430px) {
+        .sectionIndex__div2 {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto auto;  
+            justify-items: center;
+            .sectionIndex__video {
+                grid-row: 1;
+                justify-items: center;
+                align-items: center;
+                .sectionIndex__vid {
+                    width: 350px;
+                    height: auto;
+                }
+            }
+            .sectionIndex__p {
+                grid-row: 2;
+                font-size: small;
+                -ms-text-size-adjust: initial;
+                padding: 10px;
+                justify-self: start;
+                align-self: center;
+            }
+        }
+    }
+
+    @media (min-width: 431px) and (max-width: 768px){
+        .sectionIndex__div2 {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto auto;  
+            justify-items: center;
+            .sectionIndex__video {
+                grid-row: 1;
+                justify-items: center;
+                align-items: center;
+                .sectionIndex__vid {
+                    width: 430px;
+                    height: 250px;
+                }
+            }
+            .sectionIndex__p {
+                grid-row: 2;
+                font-size: medium;
+                -ms-text-size-adjust: initial;
+                padding: 10px;
+                justify-self: start;
+                align-self: center;
+            }
+        }
+        
+        
+    
+    }
+    
+    @media (min-width: 769px) and (max-width: 1024px){
+        .sectionIndex__div2 {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto auto;  
+            justify-items: center;
+            .sectionIndex__video {
+                grid-row: 1;
+                .sectionIndex__vid {
+                    width: 720px;
+                    height: 400px;
+                }
+            }
+            .sectionIndex__p {
+                grid-row: 2;
+                font-size: medium;
+                -ms-text-size-adjust: initial;
+                padding: 10px;
+                justify-self: start;
+                align-self: center;
+            }
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .sectionIndex__div2 {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto auto;  
+            justify-items: center;
+            .sectionIndex__video {
+                grid-row: 1;
+                .sectionIndex__vid {
+                    width: 720px;
+                    height: 420px;
+                }
+            }
+            .sectionIndex__p {
+                grid-row: 2;
+                font-size: large;
+                -ms-text-size-adjust: initial;
+                padding: 10px;
+                justify-self: start;
+                align-self: center;
+            }
+        }
+    }
+}
