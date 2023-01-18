@@ -2,7 +2,7 @@ CREATE DATABASE database_links;
 
 USE database_links;
 
---Users Table
+-- CRECION DE TABLA users
 
 CREATE TABLE users(
     id INT(11) NOT NULL,
@@ -19,7 +19,7 @@ ALTER TABLE users
 
 DESCRIBE users;
 
--- Links Tables
+-- CREACION DE TABLA links
 
 CREATE TABLE links ( 
     id INT(11) NOT NULL,

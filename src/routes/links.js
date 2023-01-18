@@ -3,13 +3,14 @@ const express = require('express')
 const router = express.Router()
 
 const pool = require('../database')
+const { isLoggedIn } = require('../lib/auth')
 
-router.get('/add', (req, res) => {
+router.get('/add', isLoggedIn, (req, res) => {
     res.render('links/add')
 })
 
 /* RECIBE INFORMACION DEL FRONT */
-router.post('/add', async (req, res) => {
+router.post('/add', isLoggedIn,async (req, res) => {
 //router.post('/add', (req, res) => {
     //TOMO TODOS LOS DATOS DEL FORM
     const {title, url, description} = req.body
@@ -18,7 +19,7 @@ router.post('/add', async (req, res) => {
         title,
         url,
         description,
-        user_id: req.user_id
+        /* user_id: req.user_id */
     }
     console.log(newLink)
     //GUARDO DATO DEL FORMULARIO EN MI BD
@@ -28,28 +29,29 @@ router.post('/add', async (req, res) => {
 })
 
 /* RUTA PARA MOSTRAR LINKS */
-router.get('/', async (req, res) => {
-    const links = await pool.query('SELECT * FROM links')
+router.get('/', isLoggedIn, async (req, res) => {
+    const links = await pool.query('SELECT * FROM links WHERE user_id = ?', [req.user.id])
     console.log(links)
     res.render('links/list', { links })
 })
 
 /* RUTA PARA BORRAR Y REDIRECCIONAR EN LA DB */
-router.get('/delete/:id', async (req, res) => {
+router.get('/delete/:id', isLoggedIn, async (req, res) => {
     const {id} = req.params
-    await pool.query('DELETE FROM links WHERE ID = ?', [id])
+    await pool.query('DELETE FROM links WHERE id = ?', [id])
     req.flash('success', 'link borrado con exito')
     res.redirect('/links')
 })
 
-router.get('/edit/:id', async (req, res) => {
+/* RUTA DE EDICION DE LINKS */
+router.get('/edit/:id', isLoggedIn,async (req, res) => {
     const { id } = req.params
     const links = await pool.query('SELECT * FROM links WHERE id = ?', [id])
     res.render('links/edit', {link: links[0]} )
 })
 
 /* RUTA PARA EDITAR LINKS */
-router.post('/edit/:id',  async (req, res) => {
+router.post('/edit/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params
     const { title, url, description } = req.body
     const newLink = {
@@ -61,5 +63,6 @@ router.post('/edit/:id',  async (req, res) => {
     req.flash('success', 'Link actualizado con exito')
     res.redirect('/links')
 })
+
 
 module.exports = router
