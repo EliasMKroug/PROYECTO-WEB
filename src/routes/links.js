@@ -5,37 +5,35 @@ const router = express.Router()
 const pool = require('../database')
 const { isLoggedIn } = require('../lib/auth')
 
+/* ENDPOINT PARA REFRESCAR USUARIO ACTUAL */
 router.get('/add', isLoggedIn, (req, res) => {
     res.render('links/add')
 })
 
-/* RECIBE INFORMACION DEL FRONT */
+/* ENDOPOINT PARA AGREGAR LINK */
 router.post('/add', isLoggedIn,async (req, res) => {
-//router.post('/add', (req, res) => {
-    //TOMO TODOS LOS DATOS DEL FORM
     const {title, url, description} = req.body
-    //LO GUARDO EN ESTA NUEVA VARIABLE
+    let user_id = req.user.id
     const newLink = {
         title,
         url,
         description,
-        /* user_id: req.user_id */
+        user_id
     }
     console.log(newLink)
-    //GUARDO DATO DEL FORMULARIO EN MI BD
     await pool.query ('INSERT INTO links set ?', [newLink])
     req.flash('success', 'Link agregado con exito')
     res.redirect('/links');
 })
 
-/* RUTA PARA MOSTRAR LINKS */
+/* ENDPOUINT PARA MOSTRAR LINKS POR USUARIO*/
 router.get('/', isLoggedIn, async (req, res) => {
     const links = await pool.query('SELECT * FROM links WHERE user_id = ?', [req.user.id])
     console.log(links)
     res.render('links/list', { links })
 })
 
-/* RUTA PARA BORRAR Y REDIRECCIONAR EN LA DB */
+/* ENDOPOINT PARA BORRAR Y REDIRECCIONAR EN LA DB */
 router.get('/delete/:id', isLoggedIn, async (req, res) => {
     const {id} = req.params
     await pool.query('DELETE FROM links WHERE id = ?', [id])
@@ -63,6 +61,5 @@ router.post('/edit/:id', isLoggedIn, async (req, res) => {
     req.flash('success', 'Link actualizado con exito')
     res.redirect('/links')
 })
-
 
 module.exports = router

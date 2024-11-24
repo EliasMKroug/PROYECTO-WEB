@@ -45,5 +45,4 @@ router.get('/logout', isLoggedIn, async (req, res) => {
     res.redirect('/signin')
 })
 
-
 module.exports = router
